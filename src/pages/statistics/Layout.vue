@@ -12,6 +12,8 @@ export default defineComponent({
 
   setup () {
 
+    const age = ref(18)
+
     return { name: ref('lxh') }
   },
 })
