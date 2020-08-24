@@ -1,7 +1,6 @@
 <template>
-  <section class="personal-container">
-    个人中心
-    <van-button @click="$router.push({ name: 'SetStyle' })">换肤</van-button>
+  <section class="personality">
+  
   </section>
 </template>
 
@@ -9,7 +8,7 @@
 import { defineComponent } from '@vue/composition-api'
 
 export default defineComponent({
-  name: 'Personal',
+  name: 'personality',
 
   setup () {
     return {}
@@ -18,7 +17,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-  .personal-container {
+  .personality {
     
   }
 </style>

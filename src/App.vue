@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <top-bar v-if="!$route.meta.root && !$route.meta.custom" />
     <router-view />
     <van-tabbar v-model="active">
       <van-tabbar-item icon="home-o" to="/">
