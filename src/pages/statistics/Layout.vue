@@ -12,7 +12,7 @@ export default defineComponent({
 
   setup () {
 
-    const name = "lxh";
+    
 
     return { name: ref('lxh') }
   },
