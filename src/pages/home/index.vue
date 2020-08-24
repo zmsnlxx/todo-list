@@ -1,6 +1,6 @@
 <template>
   <section class="home-page">
-    <p>{{ name }}</p>
+    <p>首页{{ name }}</p>
   </section>
 </template>
 
