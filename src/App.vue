@@ -2,7 +2,7 @@
   <div id="app">
     <top-bar v-if="!$route.meta.root && !$route.meta.custom" />
     <router-view />
-    <van-tabbar v-model="active">
+    <van-tabbar v-if="$route.meta.root" v-model="active">
       <van-tabbar-item icon="home-o" to="/">
         <template #icon="props">
           <icon v-if="props.active" name="#list-blue" />
