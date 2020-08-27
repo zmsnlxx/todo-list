@@ -1,7 +1,9 @@
 <template>
-  <section class="">
-    <top-bar v-if="!$route.meta.root && !$route.meta.custom" />
-    <router-view />
+  <div class="app-container">
+    <section class="root-layout" :class="{ 'is-root': $route.meta.root }">
+      <top-bar v-if="!$route.meta.root && !$route.meta.custom" />
+      <router-view />
+    </section>
     <van-tabbar v-if="$route.meta.root" v-model="active">
       <van-tabbar-item v-for="item in rootNavs" :key="item.to" :to="item.to">
         <template #icon="props">
@@ -11,7 +13,7 @@
         <span>{{ item.label }}</span>
       </van-tabbar-item>
     </van-tabbar>
-  </section>
+  </div>
 </template>
 
 <script lang="ts">
@@ -35,6 +37,11 @@ export default defineComponent({
 
 <style lang="less" scoped>
   .root-layout {
+    min-height: 100vh;
+    box-sizing: border-box;
     
+    &.is-root {
+      padding-bottom: 50px;
+    }
   }
 </style>
