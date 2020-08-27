@@ -8,15 +8,14 @@
           <span class="color">注册</span>
         </div>
         <div v-else @click="isLogin = true">
-          <van-icon name="arrow-left" />
-          <span>返回登录</span>
+          <span class="color">返回登录</span>
         </div>
       </div>
     </div>
     <van-form class="content" @submit="onSubmit">
       <van-field v-model="form.name" :border="false" label-width="60" maxlength="6" name="用户名" label="用户名" placeholder="请输入用户名" />
       <van-field v-model="form.password" :border="false" label-width="60" type="password" name="密码" label="密码" placeholder="请输入密码" />
-      <van-field v-if="!isLogin" v-model="form.psw" :border="false" label-width="60" type="password" name="验证密码" label="验证密码" placeholder="请再次输入密码" />
+      <van-field v-if="!isLogin" v-model="password" :border="false" label-width="60" type="password" name="验证密码" label="验证密码" placeholder="请再次输入密码" />
       <van-button round color="#FE9C01" block type="info" native-type="submit">{{ isLogin ? '登录' : '注册' }}</van-button>
     </van-form>
     <div class="footer">
@@ -29,22 +28,38 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, computed, ref } from '@vue/composition-api'
+import { defineComponent, ref, reactive } from '@vue/composition-api'
+import { register, login } from './api'
+import { Toast } from 'vant'
 
-const loginForm = () => ({ name: '', password: '' })
-const registerForm = () => ({ name: '', password: '', psw: '' })
 export default defineComponent({
   name: 'Login',
 
   setup () {
     const isLogin = ref<boolean>(true)
-    const form = computed(() => isLogin.value ? loginForm() : registerForm())
-    console.log(form.value)
+    const password = ref('')
+    const form = reactive<User.AuthParams>({ name: '', password: '' })
     const onSubmit = () => {
-    
+      const api = isLogin.value ? login : register
+      if (!form.name) return Toast.fail('请输入用户名')
+      if (!form.password) return Toast.fail('请输入密码')
+      if (!isLogin.value) {
+        if (form.password !== password.value) {
+          password.value = ''
+          return Toast.fail('两次密码不一致,请重新输入')
+        }
+      }
+      api(form).then(res => {
+        Toast.success(res)
+        if (isLogin.value) {
+          router.push({ name: 'Home' })
+        } else {
+          isLogin.value = true
+        }
+      })
     }
 
-    return { form, onSubmit, isLogin }
+    return { form, onSubmit, isLogin, password }
   },
 })
 </script>

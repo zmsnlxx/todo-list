@@ -1,6 +1,6 @@
 <template>
   <section class="home-page">
-    <p>首页{{ name }}</p>
+    <p>首页</p>
   </section>
 </template>
 
@@ -11,7 +11,7 @@ export default defineComponent({
   name: 'HomePage',
 
   setup () {
-    return { name: ref('lxx') }
+    return {}
   },
 })
 </script>

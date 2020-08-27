@@ -1,8 +1,9 @@
+import RootLayout from '@/pages/RootLayout.vue'
+
 export default {
   path: '/statistics',
-  meta: { update: true },
-  component: () => import('@/pages/statistics/Layout.vue'),
+  component: RootLayout,
   children: [
-    { path: '', name: 'Statistics', meta: { title: '统计中心', custom: true }, component: () => import('@/pages/statistics/index.vue') },
+    { path: '', name: 'Statistics', meta: { title: '统计中心', custom: true, root: true }, component: () => import('@/pages/statistics/index.vue') },
   ]
 }

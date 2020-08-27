@@ -1,6 +1,7 @@
 <template>
   <section class="personal-container">
     个人中心
+    <span>{{ user.name }}</span>
     <van-button @click="$router.push({ name: 'SetStyle' })">换肤</van-button>
   </section>
 </template>
@@ -12,7 +13,7 @@ export default defineComponent({
   name: 'Personal',
 
   setup () {
-    return {}
+    return { user: store.getters.user }
   },
 })
 </script>
