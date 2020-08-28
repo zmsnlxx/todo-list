@@ -14,12 +14,10 @@ Vue.use(CompositionApi)
 router.beforeEach(async (to: any, from: any, next: any) => {
   const token = getToken()
   if (token) {
-    console.log(store.getters.user)
     if (store.getters.user) {
       next()
     } else {
       getUserInfo().then(res => {
-        console.log(res)
         store.dispatch('setUser', res)
         next()
       })

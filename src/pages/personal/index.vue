@@ -4,11 +4,11 @@
       <div class="user">
         <div class="img">
           <van-image v-if="user.headPortrait" :src="user.headPortrait" round />
-          <van-image v-else round src="https://img.yzcdn.cn/vant/cat.jpeg" />
+          <van-image v-else round src="/img/head-portrait.jpg" />
         </div>
         <div class="info">
           <div class="name">{{ user.name }}</div>
-          <div class="text">
+          <div class="text" @click="$router.push({ name: 'Setting' })">
             <span>编辑个人资料</span>
             <van-icon name="arrow" />
           </div>
