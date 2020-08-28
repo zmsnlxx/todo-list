@@ -1,5 +1,5 @@
 import Vue from 'vue'
-import { Button, Cell, CellGroup, Tabbar, TabbarItem, NavBar, Image as VanImage, Form, Field, Icon } from 'vant'
+import { Button, Cell, CellGroup, Tabbar, TabbarItem, NavBar, Image as VanImage, Form, Field, Icon, ActionSheet, DatetimePicker, Popup, Area } from 'vant'
 
 Vue.use(Button)
 Vue.use(Cell)
@@ -11,6 +11,10 @@ Vue.use(VanImage);
 Vue.use(Form);
 Vue.use(Field);
 Vue.use(Icon);
+Vue.use(ActionSheet);
+Vue.use(DatetimePicker);
+Vue.use(Popup);
+Vue.use(Area);
 
 import IconFont from './IconFont.vue'
 import TopBar from './TopBar.vue'

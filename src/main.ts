@@ -17,10 +17,9 @@ router.beforeEach(async (to: any, from: any, next: any) => {
     if (store.getters.user) {
       next()
     } else {
-      getUserInfo().then(res => {
-        store.dispatch('setUser', res)
-        next()
-      })
+      const user = await getUserInfo()
+      await store.dispatch('setUser', user)
+      next()
     }
   } else {
     Toast.fail('请登录')

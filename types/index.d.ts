@@ -1,3 +1,5 @@
+type AnyObject = Record<string, any>
+
 declare namespace User {
   interface AuthParams {
     name: string
@@ -7,6 +9,19 @@ declare namespace User {
   interface Info {
     name: string
     todo: any[]
-    headPortrait: string
+    img: string
+    birthday: string
+    region: string
+    regionName: string
+    gender: string
+  }
+  interface AuthUpdateParams {
+    img?: string | any
+    birthday?: string
+    regionName?: string
+    region?: string
+    gender?: string
+    password?: string
+    todo?: any[]
   }
 }

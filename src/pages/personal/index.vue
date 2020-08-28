@@ -3,7 +3,7 @@
     <div class="header">
       <div class="user">
         <div class="img">
-          <van-image v-if="user.headPortrait" :src="user.headPortrait" round />
+          <van-image v-if="user.img" :src="user.img" round />
           <van-image v-else round src="/img/head-portrait.jpg" />
         </div>
         <div class="info">
