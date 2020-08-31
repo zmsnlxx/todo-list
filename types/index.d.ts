@@ -23,5 +23,6 @@ declare namespace User {
     gender?: string
     password?: string
     todo?: any[]
+    newValue?: string
   }
 }
