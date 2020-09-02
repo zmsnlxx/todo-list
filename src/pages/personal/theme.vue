@@ -19,14 +19,18 @@ export default defineComponent({
     const theme = [
       { background: '#1296db', className: 'theme_default' },
       { background: '#d4237a', className: 'theme_default_roseRed' },
-      { background: '#f39c12', className: 'theme_default_yellow' },
       { background: '#2ecc71', className: 'theme_default_green' },
+      { background: '#9b59b6', className: 'theme_default_purple' },
+      { background: '#e74c3c', className: 'theme_default_red' },
+      { background: '#f39c12', className: 'theme_default_orange' },
+      { background: '#1abc9c', className: 'theme_default_cyan' },
+      { background: '#34495e', className: 'theme_default_spaceGray' },
     ]
 
     onMounted(() => {
       const className = window.localStorage.getItem('className')
       if (className) {
-        radio.value = theme.findIndex(item => item.className === className)
+        radio.value = theme.findIndex(item => item.className === className) || 0
       }
     })
 

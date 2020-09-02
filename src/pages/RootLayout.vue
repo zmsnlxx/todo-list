@@ -17,6 +17,7 @@
 
 <script lang="ts">
 import { defineComponent, ref } from '@vue/composition-api'
+import router from '@/router'
 
 const rootNavs = [
   { label: '首页', icon: 'list', to: '/' },
@@ -28,6 +29,10 @@ export default defineComponent({
 
   setup () {
     const active = ref(rootNavs.findIndex(e => e.to === router.currentRoute.path) || 0)
+
+    router.afterEach((to) => {
+      active.value = rootNavs.findIndex(e => e.to === to.path) || 0
+    })
     
     return { active, rootNavs }
   },
