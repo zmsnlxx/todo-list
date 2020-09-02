@@ -1,6 +1,9 @@
 <template>
   <section class="home-page">
     <p>首页</p>
+    <div class="theme_default">
+      <div class="text">lxx</div>
+    </div>
   </section>
 </template>
 

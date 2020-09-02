@@ -1,18 +1,16 @@
 <template>
   <div id="app">
     <router-view />
-    
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
-import { isWechat } from '@/utils/wechat'
+import { defineComponent, onMounted } from '@vue/composition-api'
 export default defineComponent({
   setup() {
-    if (!isWechat()) {
-      console.log('---')
-      // getRegionByBrowser()
-    }
+    onMounted(() => {
+      const className = window.localStorage.getItem('className')
+      document.body.className = className ? className : 'theme_default'
+    })
   }
 })
 </script>

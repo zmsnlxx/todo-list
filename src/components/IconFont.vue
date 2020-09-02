@@ -24,7 +24,8 @@ export default defineComponent({
 
 <style lang="less" scoped>
   .icon {
-    width: 1em; height: 1em;
+    width: 1em;
+    height: 1em;
     vertical-align: middle;
     fill: currentColor;
     overflow: hidden;

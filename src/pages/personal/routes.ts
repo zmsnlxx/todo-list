@@ -8,5 +8,6 @@ export default {
     { path: '/style', name: 'SetStyle', meta: { title: '一键换肤' }, component: () => import('@/pages/personal/personality.vue') },
     { path: '/setting', name: 'Setting', meta: { title: '设置' }, component: () => import('@/pages/personal/setting.vue') },
     { path: '/setPassword', name: 'SetPassword', meta: { title: '更改密码' }, component: () => import('@/pages/personal/setPassword.vue') },
+    { path: '/theme', name: 'Theme', meta: { title: '设置主题' }, component: () => import('@/pages/personal/theme.vue') },
   ]
 }

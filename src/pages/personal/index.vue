@@ -1,5 +1,5 @@
 <template>
-  <section class="personal-container">
+  <section class="personal-container theme_default">
     <div class="header">
       <div class="user">
         <div class="img">
@@ -17,10 +17,13 @@
     </div>
     <div class="content">
       <div class="card">
-        <div class="title van-hairline--bottom">清单汇总</div>
-      </div>
-      <div class="card">
         <div class="title van-hairline--bottom">我的设置</div>
+        <div class="container">
+          <div v-for="i in 4" :key="i" class="item" @click="$router.push({ name: 'Theme' })">
+            <icon name="#theme" />
+            <span class="label_name">个性主题</span>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -46,10 +49,11 @@ export default defineComponent({
     .header {
       height: 30%;
       width: 100%;
-      background-color: #448AFF;
       position: relative;
       padding: 0 12px;
       box-sizing: border-box;
+      background: var(--backgroundColor);
+      color: var(--color);
       
       .user {
         position: absolute;
@@ -69,7 +73,6 @@ export default defineComponent({
         }
         
         .info {
-          color: @white;
           
           .name {
             font-size: 20px;
@@ -99,18 +102,42 @@ export default defineComponent({
       .card {
         width: calc(100% - 30px);
         margin: 0 auto 20px auto;
-        min-height: 150px;
         border-radius: 6px;
-        padding: 0 12px;
+        padding: 0 12px 10px 12px;
         box-sizing: border-box;
         background-color: @white;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
         
         .title {
           height: 50px;
+          width: 100%;
           line-height: 50px;
           font-weight: 500;
           color: #111111;
+        }
+
+        .container {
+          width: 100%;
+          display: flex;
+          flex-wrap: wrap;
+          min-height: 80px;
+
+          .item {
+            width: 33%;
+            height: 70px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            text-align: center;
+            font-size: 14px;
+
+            .icon {
+              width: 20px;
+              height: 20px;
+              margin: 0 auto 10px;
+              color: var(--backgroundColor);
+            }
+          }
         }
       }
     }

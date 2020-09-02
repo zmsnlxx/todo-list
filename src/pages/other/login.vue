@@ -5,10 +5,10 @@
       <div class="info">
         <div v-if="isLogin" @click="isLogin = false">
           <span>还没账号，立即</span>
-          <span class="color">注册</span>
+          <span class="icon_active">注册</span>
         </div>
         <div v-else @click="isLogin = true">
-          <span class="color">返回登录</span>
+          <span class="icon_active">返回登录</span>
         </div>
       </div>
     </div>
@@ -16,7 +16,7 @@
       <van-field v-model="form.name" :border="false" label-width="60" maxlength="6" name="用户名" label="用户名" placeholder="请输入用户名" />
       <van-field v-model="form.password" :border="false" label-width="60" type="password" name="密码" label="密码" placeholder="请输入密码" />
       <van-field v-if="!isLogin" v-model="password" :border="false" label-width="60" type="password" name="验证密码" label="验证密码" placeholder="请再次输入密码" />
-      <van-button round color="#FE9C01" block type="info" native-type="submit">{{ isLogin ? '登录' : '注册' }}</van-button>
+      <van-button round block native-type="submit">{{ isLogin ? '登录' : '注册' }}</van-button>
     </van-form>
     <div class="footer">
       <div>第三方登录</div>
@@ -91,10 +91,6 @@ export default defineComponent({
           height: 16px;
           margin-right: 10px;
         }
-        
-        .color {
-          color: #FE9C01
-        }
       }
     }
     
@@ -105,6 +101,8 @@ export default defineComponent({
       
       .van-button {
         margin-top: 20px;
+        background: var(--backgroundColor);
+        color: var(--color);
       }
     }
     
@@ -122,13 +120,15 @@ export default defineComponent({
       .icon-box {
         height: 30px;
         border-radius: 50%;
-        border: 1px solid @grey-6;
+        border: 1px solid;
+        border-color: var(--border-color);
         
         .icon {
           width: 30px;
           height: 30px;
           line-height: 30px;
           display: inherit;
+          color: var(--backgroundColor);
         }
       }
       

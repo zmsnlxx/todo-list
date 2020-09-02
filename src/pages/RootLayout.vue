@@ -5,12 +5,11 @@
       <router-view />
     </section>
     <van-tabbar v-if="$route.meta.root" v-model="active">
-      <van-tabbar-item v-for="item in rootNavs" :key="item.to" :to="item.to">
+      <van-tabbar-item v-for="(item, index) in rootNavs" :key="item.to" :to="item.to">
         <template #icon="props">
-          <icon v-if="props.active" :name="`#${item.icon}-blue`" />
-          <icon v-else :name="`#${item.icon}`" />
+          <icon :name="`#${item.icon}`" :class="props.active ? 'icon_active' : ''" />
         </template>
-        <span>{{ item.label }}</span>
+        <span :class="active === index ? 'icon_active' : ''">{{ item.label }}</span>
       </van-tabbar-item>
     </van-tabbar>
   </div>
@@ -43,5 +42,8 @@ export default defineComponent({
     &.is-root {
       padding-bottom: 50px;
     }
+  }
+  .icon_active {
+    color: var(--backgroundColor);
   }
 </style>

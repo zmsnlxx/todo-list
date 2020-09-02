@@ -52,13 +52,14 @@ export default defineComponent({
   
   /deep/ .van-nav-bar {
     background-size: 100% 100%;
+    background: var(--backgroundColor);
+
+    .van-icon, .van-nav-bar__title {
+      color: var(--color);
+    }
     
     &__left, &__right {
       padding: 0 12px;
-      
-      .van-icon, .van-nav-bar__text {
-        color: #333333;
-      }
       
       .right {
         display: flex;
