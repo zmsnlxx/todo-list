@@ -4,6 +4,7 @@
       <top-bar v-if="!$route.meta.root && !$route.meta.custom" />
       <router-view />
     </section>
+
     <van-tabbar v-if="$route.meta.root" v-model="active">
       <van-tabbar-item v-for="(item, index) in rootNavs" :key="item.to" :to="item.to">
         <template #icon="props">
@@ -16,7 +17,7 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref } from '@vue/composition-api'
+import { defineComponent, ref, watch } from '@vue/composition-api'
 import router from '@/router'
 
 const rootNavs = [
@@ -27,11 +28,11 @@ const rootNavs = [
 export default defineComponent({
   name: 'RootLayout',
 
-  setup () {
+  setup (p, ctx) {
     const active = ref(rootNavs.findIndex(e => e.to === router.currentRoute.path) || 0)
 
-    router.afterEach((to) => {
-      active.value = rootNavs.findIndex(e => e.to === to.path) || 0
+    watch(() => ctx.root.$route, val => {
+      active.value = rootNavs.findIndex(e => e.to === val.path) || 0
     })
     
     return { active, rootNavs }

@@ -1,9 +1,6 @@
 <template>
   <section class="home-page">
-    <p>首页</p>
-    <div class="theme_default">
-      <div class="text">lxx</div>
-    </div>
+    <top-bar title="个人清单" :left-arrow="false" />
   </section>
 </template>
 

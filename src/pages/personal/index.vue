@@ -1,5 +1,5 @@
 <template>
-  <section class="personal-container theme_default">
+  <section class="personal-container">
     <div class="header">
       <div class="user">
         <div class="img">
@@ -16,6 +16,15 @@
       </div>
     </div>
     <div class="content">
+      <div class="card">
+        <div class="title van-hairline--bottom">我的设置</div>
+        <div class="container">
+          <div v-for="i in 4" :key="i" class="item" @click="$router.push({ name: 'Theme' })">
+            <icon name="#theme" />
+            <span class="label_name">个性主题</span>
+          </div>
+        </div>
+      </div>
       <div class="card">
         <div class="title van-hairline--bottom">我的设置</div>
         <div class="container">
@@ -43,11 +52,9 @@ export default defineComponent({
 
 <style lang="less" scoped>
   .personal-container {
-    background-color: #F4F6F8;
-    height: calc(100vh - 50px);
-    
+
     .header {
-      height: 30%;
+      height: 200px;
       width: 100%;
       position: relative;
       padding: 0 12px;
@@ -98,8 +105,9 @@ export default defineComponent({
       position: absolute;
       top: 25%;
       width: 100%;
-      
+
       .card {
+        z-index: 100;
         width: calc(100% - 30px);
         margin: 0 auto 20px auto;
         border-radius: 6px;
@@ -107,7 +115,7 @@ export default defineComponent({
         box-sizing: border-box;
         background-color: @white;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
-        
+
         .title {
           height: 50px;
           width: 100%;

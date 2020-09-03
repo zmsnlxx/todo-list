@@ -3,7 +3,7 @@ import VueRouter, { RouteConfig } from "vue-router";
 import NotFound from '@/pages/404.vue'
 import Home from '@/pages/home/index.vue'
 import RootLayout from '@/pages/RootLayout.vue'
-import Login from '@/pages/other/login.vue'
+import Login from '@/pages/other/Login.vue'
 import statistics from '@/pages/statistics/routes'
 import personal from '@/pages/personal/routes'
 

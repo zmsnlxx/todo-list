@@ -25,6 +25,9 @@ export default defineComponent({
       { background: '#f39c12', className: 'theme_default_orange' },
       { background: '#1abc9c', className: 'theme_default_cyan' },
       { background: '#34495e', className: 'theme_default_spaceGray' },
+      { background: '#34495e', className: 'theme_default_spaceGray' },
+      { background: '#34495e', className: 'theme_default_spaceGray' },
+      { background: '#34495e', className: 'theme_default_spaceGray' },
     ]
 
     onMounted(() => {

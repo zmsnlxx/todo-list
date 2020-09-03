@@ -18,8 +18,8 @@ Vue.use(Area);
 Vue.use(RadioGroup);
 Vue.use(Radio);
 
-import IconFont from './IconFont.vue'
-import TopBar from './TopBar.vue'
+import IconFont from './TodoIconFont.vue'
+import TopBar from './TodoTopBar.vue'
 
 Vue.component('Icon', IconFont);
 Vue.component('TopBar', TopBar);
