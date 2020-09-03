@@ -91,6 +91,10 @@ export default defineComponent({
           height: 16px;
           margin-right: 10px;
         }
+
+        .icon_active {
+          color: var(--backgroundColor);
+        }
       }
     }
     

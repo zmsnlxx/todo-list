@@ -106,6 +106,10 @@ export default defineComponent({
       top: 25%;
       width: 100%;
 
+      .card:last-child {
+        margin-bottom: 70px;
+      }
+
       .card {
         z-index: 100;
         width: calc(100% - 30px);

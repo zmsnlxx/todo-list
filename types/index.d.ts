@@ -25,4 +25,15 @@ declare namespace User {
     todo?: any[]
     newValue?: string
   }
+  interface TodoItem {
+    label: string
+    id: string
+    list: TodoListItem[]
+  }
+
+  interface TodoListItem {
+    label: string
+    id: string
+    isCarryOut: boolean
+  }
 }

@@ -16,6 +16,7 @@
       <van-cell title="关于我们" center value="假装这里有东西" />
       <van-cell title="当前版本" center value="v1.0.0" />
     </van-cell-group>
+    <van-button block @click="logout" class="logout-btn">退出登录</van-button>
   
     <van-action-sheet v-model="show.gender" :actions="[{ name: '男' }, { name: '女' }]" cancel-text="取消" @select="setGender" />
   
@@ -34,6 +35,7 @@ import { defineComponent, reactive, ref, computed } from '@vue/composition-api'
 import { Toast } from 'vant'
 import { updatePersonalInfo } from './api'
 import areaList from '../../../public/json/area-list.json'
+import { removeToken } from '@/utils/token'
 
 export default defineComponent({
   name: 'Setting',
@@ -44,7 +46,13 @@ export default defineComponent({
     
     const birth = { value: new Date(user.value.birthday || '2000/1/1'), min: new Date('1949/1/1'), max: new Date() }
     const input = ref<HTMLElement | null>(null)
-    
+
+    const logout = () => {
+      removeToken()
+      store.dispatch('setUser', null)
+      router.push('/login')
+    }
+
     const setGender = async ({ name }: { name: string }) => {
       await updatePersonalInfo({ gender: name })
       await store.dispatch('mergeUser', { gender: name })
@@ -84,7 +92,7 @@ export default defineComponent({
       };
     }
     
-    return { user, show, setGender, birth, setBirth, setArea, areaList, upload, handleFile, input }
+    return { user, show, setGender, birth, setBirth, setArea, areaList, upload, handleFile, input, logout }
   },
 })
 </script>
@@ -101,6 +109,12 @@ export default defineComponent({
     /deep/ .van-cell__value,.van-field__value, .van-cell__title {
       min-height: 40px;
       line-height: 40px;
+    }
+
+    .logout-btn {
+      position: fixed;
+      bottom: 0;
+      color: red;
     }
   }
 </style>

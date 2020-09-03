@@ -5,7 +5,7 @@
       <van-field v-model="form.newValue" type="password" label="新密码" placeholder="请输入新密码" />
       <van-field v-model="form.repeat" type="password" label="确认密码" placeholder="请再次输入新密码" />
       <div style="margin: 16px;">
-        <van-button round block type="info" :disabled="disabled" native-type="submit">提交</van-button>
+        <van-button round block :disabled="disabled" native-type="submit">提交</van-button>
       </div>
     </van-form>
   </section>
@@ -35,14 +35,14 @@ export default defineComponent({
         }, 1000)
       })
     }
-    
+
     watch(() => form, val => {
       const keys = Object.keys(val)
       let num = 0
       keys.forEach(key => { if (form[key]) num++ })
       disabled.value = num !== 3
     }, { deep: true })
-    
+
     return { form, onSubmit, disabled }
   },
 })
@@ -50,6 +50,9 @@ export default defineComponent({
 
 <style lang="less" scoped>
   .set-password {
-    
+    .van-button {
+      background: var(--backgroundColor);
+      color: var(--color);
+    }
   }
 </style>

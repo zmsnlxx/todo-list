@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 
 export const instance = axios.create({
-  baseURL: ['http://localhost:8001', 'http://todotest.zmsnlxx.cn', 'http://to.zmsnlxx.cn'][process.env.BASE],
+  baseURL: ['http://192.168.0.196:8001', 'http://todotest.zmsnlxx.cn', 'http://to.zmsnlxx.cn'][process.env.BASE],
   timeout: 5000,
   withCredentials: true
 })

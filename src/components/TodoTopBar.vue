@@ -1,17 +1,20 @@
 <template>
   <div class="wrapper">
     <div class="top-bar">
-      <van-nav-bar v-if="type === 'fill'" :title="title" :border="!noBorder" :left-text="backText" :left-arrow="leftArrow" @click-left="back">
+      <van-nav-bar :title="title" :border="!noBorder" :left-text="backText" :left-arrow="leftArrow" @click-left="back">
         <template v-if="!hideTitle" #title>
           <div class="title van-ellipsis">
             <slot name="title">{{ title || $route.meta.title }}</slot>
           </div>
         </template>
+        <template #right>
+          <div v-if="showAction" class="right">
+            <slot>
+              <icon size="16" name="#summary" @click.native="$emit('click-right')" />
+            </slot>
+          </div>
+        </template>
       </van-nav-bar>
-      <div v-else-if="type === 'icon'" class="header-icon">
-        <van-icon name="arrow-left" class="left" size="16" @click="back" />
-        <van-icon v-if="showAction" name="ellipsis" class="right" size="16" @click="$emit('click-right')" />
-      </div>
     </div>
   </div>
 </template>
@@ -24,7 +27,6 @@ export default defineComponent({
 
   props: {
     title: { type: String, default: '' },
-    type: { type: String, default: 'fill' },
     backText: { type: String, default: '' },
     showAction: { type: Boolean, default: false },
     hideTitle: { type: Boolean, default: false },
@@ -54,7 +56,7 @@ export default defineComponent({
 
 <style lang="less" scoped>
   .wrapper {
-    height: 46px;
+    height: 50px;
   }
   .top-bar {
     position: fixed;
@@ -62,6 +64,7 @@ export default defineComponent({
     z-index: 2;
 
     /deep/ .van-nav-bar {
+      height: 50px;
       background-size: 100% 100%;
       background: var(--backgroundColor);
 
@@ -75,42 +78,13 @@ export default defineComponent({
         .right {
           display: flex;
           align-items: center;
+
+          .icon {
+            width: 20px;
+            height: 20px;
+            color: var(--color);
+          }
         }
-      }
-    }
-
-    .header-icon {
-      position: relative;
-      padding-top: 12px;
-
-      .left, .right {
-        background: rgba(0, 0, 0, .25);
-        color: white;
-        border-radius: 50%;
-        padding: 5px;
-      }
-
-      .right {
-        position: absolute;
-        right: 12px;
-      }
-
-      .left {
-        position: absolute;
-        left: 12px;
-      }
-
-      .icon {
-        position: absolute;
-        left: 12px;
-        font-size: 20px;
-        line-height: 30px;
-        width: 30px;
-        height: 30px;
-        background-color: rgba(0, 0, 0, .25);
-        border-radius: 50%;
-        text-align: center;
-        color: white;
       }
     }
   }
