@@ -1,6 +1,7 @@
 import { instance } from './instance'
 import { Method } from 'axios'
 import { Toast } from 'vant'
+import { removeToken } from '@/utils/token'
 
 export type Api<P = null, D = null> = (params?: P) => Promise<D>
 
@@ -32,12 +33,13 @@ export function generateApi<Params = null, Data = null>(path: string, method?: M
     if (res.status === 200) {
       data = res.data
     } else {
-      if (res.status === 50001) return Promise.resolve(null)
-      if (res.status === 4001) return Promise.resolve(false)
-      if (res.status !== 3201) {
-        Toast.fail({ message: res.data, icon: 'warning' })
-        return Promise.reject(res)
+      if (res.status === 501) {
+        removeToken()
+        router.push({ name: 'Login' })
+        return Promise.resolve(null)
       }
+      Toast.fail({ message: res.data, icon: 'warning' })
+      return Promise.reject(res)
     }
 
     return data

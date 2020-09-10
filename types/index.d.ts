@@ -1,5 +1,9 @@
 type AnyObject = Record<string, any>
 
+declare namespace Other {
+  interface FormType {[key: string]: string | boolean | undefined | number}
+}
+
 declare namespace User {
   interface AuthParams {
     name: string
@@ -26,14 +30,23 @@ declare namespace User {
     newValue?: string
   }
   interface TodoItem {
-    label: string
-    id: string
-    list: TodoListItem[]
+    [id: string]: {
+      title: string
+      list: TodoListItem[]
+    }
   }
 
   interface TodoListItem {
-    label: string
+    title: string
     id: string
-    isCarryOut: boolean
+    isCarryOut: boolean //是否已完成
+    endTime: number | undefined // 结束时间(时间戳)
+    grade: string // 任务等级 0： 无优先级； 1：低优先级；2：中优先级；3：高优先级
+    content: string // 任务内容
+  }
+
+  interface UpdateListTaskParams extends TodoListItem {
+    parentId?: string
   }
 }
+

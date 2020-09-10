@@ -17,16 +17,13 @@ export default defineComponent({
   setup () {
     const radio = ref(0)
     const theme = [
-      { background: '#1296db', className: 'theme_default' },
+      { background: '#f39c12', className: 'theme_default' },
+      { background: '#1296db', className: 'theme_default_blue' },
       { background: '#d4237a', className: 'theme_default_roseRed' },
       { background: '#2ecc71', className: 'theme_default_green' },
       { background: '#9b59b6', className: 'theme_default_purple' },
       { background: '#e74c3c', className: 'theme_default_red' },
-      { background: '#f39c12', className: 'theme_default_orange' },
       { background: '#1abc9c', className: 'theme_default_cyan' },
-      { background: '#34495e', className: 'theme_default_spaceGray' },
-      { background: '#34495e', className: 'theme_default_spaceGray' },
-      { background: '#34495e', className: 'theme_default_spaceGray' },
       { background: '#34495e', className: 'theme_default_spaceGray' },
     ]
 

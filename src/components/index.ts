@@ -1,10 +1,11 @@
 import Vue from 'vue'
-import { Button, Cell, CellGroup, Tabbar, TabbarItem, NavBar, Image as VanImage, Form, Field, Icon, ActionSheet, DatetimePicker, Popup, Area, RadioGroup, Radio, Tab, Tabs, NoticeBar, Empty } from 'vant'
+import { Button, Cell, CellGroup, Tabbar, TabbarItem, NavBar, Image as VanImage, Form, Field, Icon, ActionSheet, DatetimePicker, Popup, Area, RadioGroup, Radio, Tab, Tabs, NoticeBar, Empty, SwipeCell, Checkbox, CheckboxGroup, Calendar } from 'vant'
 
 Vue.use(Button)
 Vue.use(Cell)
 Vue.use(CellGroup)
 Vue.use(Tabbar);
+Vue.use(TabbarItem);
 Vue.use(TabbarItem);
 Vue.use(NavBar);
 Vue.use(VanImage);
@@ -21,6 +22,10 @@ Vue.use(Tab);
 Vue.use(Tabs);
 Vue.use(NoticeBar);
 Vue.use(Empty);
+Vue.use(SwipeCell);
+Vue.use(Checkbox);
+Vue.use(CheckboxGroup);
+Vue.use(Calendar);
 
 import IconFont from './TodoIconFont.vue'
 import TopBar from './TodoTopBar.vue'

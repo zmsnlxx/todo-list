@@ -2,16 +2,22 @@
   <section class="home-page">
     <top-bar :title="currentList && currentList.label" show-action :left-arrow="false" @click-right="$router.push({ name: 'HomeCheckList' })" />
     <van-tabs v-model="active" swipeable>
-      <van-tab v-for="(item, index) in checkList" :key="index" :title="item.label" />
+      <van-tab v-for="(item, index) in checkList" :key="index" :title="item.title" />
     </van-tabs>
     <van-notice-bar left-icon="volume-o" text="点击右上角图标可编辑清单列表" />
-    <van-radio-group v-if="currentList && currentList.list.length" v-model="radio" @change="changeTheme">
-      <div v-for="item in currentList.list" :key="item.id" class="item">
-        <van-radio shape="square" :name="item.id" />
-        <span @click.stop="$router.push({ name: 'AddTask', params: { id: item.id, parentId: currentList.id } })">{{ item.label }}</span>
-      </div>
+    <van-radio-group v-if="currentList && currentList.list && currentList.list.length" v-model="radio" @change="changeTheme">
+      <van-swipe-cell v-for="item in currentList.list" :key="item.id">
+        <div class="item">
+          <van-radio shape="square" :name="item.id" />
+          <span :style="{ color: ['#C5C5C5', '#6B89D5', '#F1B754', '#D8423A'][item.grade] }" @click.stop="$router.push({ name: 'AddTask', params: { id: item.id, parentId: currentList.id } })">{{ item.title }}</span>
+        </div>
+        <template #right>
+          <van-button square type="danger" text="删除" />
+          <van-button square type="primary" text="收藏" />
+        </template>
+      </van-swipe-cell>
     </van-radio-group>
-    <van-empty v-else description="点击右下角按钮快速创建任务" />
+    <van-empty v-else description="点击右下角按钮快速创建清单任务" />
     <div class="add-btn" @click="$router.push({ name: 'AddTask', params: { parentId: currentList.id } })">
       <van-icon name="plus" size="20" />
     </div>
@@ -19,8 +25,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, ref, onMounted, computed } from '@vue/composition-api'
+import { computed, defineComponent, onMounted, ref } from '@vue/composition-api'
 import { getUserCheckList } from '@/pages/home/api'
+
+interface TodoItem {
+  id: string
+  title: string
+  list: User.TodoListItem[]
+}
 
 export default defineComponent({
   name: 'HomePage',
@@ -28,12 +40,24 @@ export default defineComponent({
   setup () {
     const active = ref<number>(0)
     const radio = ref('')
-    const checkList = ref<User.TodoItem[]>([])
+    const checkList = ref<TodoItem[]>([])
 
-    onMounted(async () => { checkList.value = await getUserCheckList() })
+    onMounted(async () => {
+      const data: User.TodoItem = await getUserCheckList()
+      checkList.value = Object.keys(data).map((item: string) => ({ id: item, ...data[item] }))
+    })
 
-    const currentList = computed(() => checkList.value[active.value] || null)
-    console.log(currentList)
+    const currentList = computed(() => {
+      if (checkList.value[active.value]) {
+        const { title, list, id } = checkList.value[active.value]
+        return {
+          title, id,
+          list: list.sort((a,b) => Number(b.grade) - Number(a.grade)),
+        }
+      } else {
+        return {}
+      }
+    })
 
     const changeTheme = (id: string) => {
       console.log(id)
@@ -72,7 +96,7 @@ export default defineComponent({
     }
 
     .van-radio-group {
-      padding: 0 12px;
+      padding: 0 0 0 12px;
 
       .item {
         display: flex;
