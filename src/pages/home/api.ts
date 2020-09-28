@@ -6,3 +6,5 @@ export const getListTask = generateApi<{ id: string, parentId: string }, User.To
 
 export const updateListTask = generateApi<User.UpdateListTaskParams, User.TodoListItem>('/v1/list/updateListTask', 'post')
 
+export const deleteListTask = generateApi<User.DeleteListTaskParams, null>('/v1/list/deleteListTask', 'post')
+

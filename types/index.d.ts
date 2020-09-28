@@ -47,6 +47,12 @@ declare namespace User {
 
   interface UpdateListTaskParams extends TodoListItem {
     parentId?: string
+    type?: string
+  }
+
+  interface DeleteListTaskParams {
+    id: string
+    parentId: string
   }
 }
 

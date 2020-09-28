@@ -35,7 +35,7 @@ export function generateApi<Params = null, Data = null>(path: string, method?: M
     } else {
       if (res.status === 501) {
         removeToken()
-        router.push({ name: 'Login' })
+        await router.push({ name: 'Login' })
         return Promise.resolve(null)
       }
       Toast.fail({ message: res.data, icon: 'warning' })

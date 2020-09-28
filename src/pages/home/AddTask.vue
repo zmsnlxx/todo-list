@@ -2,7 +2,7 @@
   <section class="add-task">
     <top-bar :title="id ? '编辑任务' : '添加任务'" />
     <div class="header van-hairline--bottom">
-      <van-checkbox v-model="form.isCarryOut" shape="square" />
+      <div />
       <div class="date" @click="show.date = true">{{ form.endTime ? formatDate(form.endTime) : '日期' }}</div>
       <van-icon name="setting-o" color="#C8C9CC" size="24" @click="show.grade = true" />
     </div>

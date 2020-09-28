@@ -5,15 +5,18 @@
       <van-tab v-for="(item, index) in checkList" :key="index" :title="item.title" />
     </van-tabs>
     <van-notice-bar left-icon="volume-o" text="点击右上角图标可编辑清单列表" />
-    <van-radio-group v-if="currentList && currentList.list && currentList.list.length" v-model="radio" @change="changeTheme">
+    <van-radio-group v-if="currentList && currentList.list && currentList.list.length" v-model="radio" @change="carryOut">
       <van-swipe-cell v-for="item in currentList.list" :key="item.id">
-        <div class="item">
-          <van-radio shape="square" :name="item.id" />
-          <span :style="{ color: ['#C5C5C5', '#6B89D5', '#F1B754', '#D8423A'][item.grade] }" @click.stop="$router.push({ name: 'AddTask', params: { id: item.id, parentId: currentList.id } })">{{ item.title }}</span>
-        </div>
+        <transition name="van-fade">
+          <div v-if="carryOutData.includes(item.id)">
+            <div class="item">
+              <van-radio shape="square" :name="item.id" />
+              <span :style="{ color: ['#C5C5C5', '#6B89D5', '#F1B754', '#D8423A'][item.grade] }" @click.stop="$router.push({ name: 'AddTask', params: { id: item.id, parentId: currentList.id } })">{{ item.title }}</span>
+            </div>
+          </div>
+        </transition>
         <template #right>
-          <van-button square type="danger" text="删除" />
-          <van-button square type="primary" text="收藏" />
+          <van-button square type="danger" text="删除" @click="deleteItem(item)" />
         </template>
       </van-swipe-cell>
     </van-radio-group>
@@ -25,8 +28,9 @@
 </template>
 
 <script lang="ts">
-import { computed, defineComponent, onMounted, ref } from '@vue/composition-api'
-import { getUserCheckList } from '@/pages/home/api'
+import { computed, defineComponent, onMounted, ref, watch } from '@vue/composition-api'
+import { deleteListTask, getUserCheckList, updateListTask } from '@/pages/home/api'
+import { Toast } from 'vant'
 
 interface TodoItem {
   id: string
@@ -41,30 +45,54 @@ export default defineComponent({
     const active = ref<number>(0)
     const radio = ref('')
     const checkList = ref<TodoItem[]>([])
+    const carryOutData = ref<string[]>([])
 
     onMounted(async () => {
-      const data: User.TodoItem = await getUserCheckList()
-      checkList.value = Object.keys(data).map((item: string) => ({ id: item, ...data[item] }))
+      await getData()
     })
 
-    const currentList = computed(() => {
+    async function getData () {
+      const data: User.TodoItem = await getUserCheckList()
+      checkList.value = Object.keys(data).map((item: string) => ({ id: item, ...data[item] }))
+    }
+
+    function deleteItem (row: User.TodoListItem) {
+      const params = Object.assign({}, _.pick(row, 'id'), { parentId: checkList.value[active.value].id })
+      deleteListTask(params).then(() => {
+        Toast.success('删除成功')
+        getData()
+      })
+    }
+
+    const currentList = computed((): { list: User.TodoListItem[], title: string, id: string } => {
       if (checkList.value[active.value]) {
         const { title, list, id } = checkList.value[active.value]
         return {
           title, id,
-          list: list.sort((a,b) => Number(b.grade) - Number(a.grade)),
+          list: list.sort((a, b) => Number(b.grade) - Number(a.grade)).filter(item => !item.isCarryOut),
         }
       } else {
-        return {}
+        return { list: [], title: '', id: '' }
       }
     })
 
-    const changeTheme = (id: string) => {
-      console.log(id)
-      console.log(radio.value)
+    watch(() => currentList.value, val => {
+      carryOutData.value = val.list.map(item => item.id)
+    })
+
+    const carryOut = (row: string) => {
+      const { list, id } = currentList.value
+      const current = list?.find(item => item.id === row) as User.TodoListItem
+      const params = Object.assign({}, current, { parentId: id, isCarryOut: true })
+      updateListTask(params).then(() => {
+        const index = carryOutData.value.findIndex(item => item === row)
+        if (index !== -1) {
+          carryOutData.value.splice(index,1)
+        }
+      })
     }
 
-    return { active, checkList, changeTheme, radio, currentList }
+    return { active, checkList, carryOut, radio, currentList, deleteItem, carryOutData }
   },
 })
 </script>
