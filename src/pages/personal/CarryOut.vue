@@ -1,6 +1,6 @@
 <template>
-  <section class="">
-
+  <section class="carry-out">
+    已完成任务
   </section>
 </template>
 
@@ -17,7 +17,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-  . {
+  .carry-out {
 
   }
 </style>

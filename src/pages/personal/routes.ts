@@ -9,5 +9,8 @@ export default {
     { path: 'setting', name: 'Setting', meta: { title: '设置' }, component: () => import('@/pages/personal/Setting.vue') },
     { path: 'setPassword', name: 'SetPassword', meta: { title: '更改密码' }, component: () => import('@/pages/personal/SetPassword.vue') },
     { path: 'theme', name: 'Theme', meta: { title: '设置主题' }, component: () => import('@/pages/personal/Theme.vue') },
+    { path: 'expired', name: 'Expired', meta: { title: '已过期任务' }, component: () => import('@/pages/personal/Expired.vue') },
+    { path: 'delete', name: 'Delete', meta: { title: '已删除任务' }, component: () => import('@/pages/personal/Delete.vue') },
+    { path: 'carryOut', name: 'CarryOut', meta: { title: '已完成任务' }, component: () => import('@/pages/personal/CarryOut.vue') },
   ]
 }

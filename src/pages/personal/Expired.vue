@@ -1,6 +1,6 @@
 <template>
-  <section class="">
-
+  <section class="expired">
+    <h1>已过期</h1>
   </section>
 </template>
 
@@ -17,7 +17,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-  . {
+  .expired {
 
   }
 </style>

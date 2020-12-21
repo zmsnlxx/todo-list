@@ -16,21 +16,12 @@
       </div>
     </div>
     <div class="content">
-      <div class="card">
-        <div class="title van-hairline--bottom">我的设置</div>
+      <div v-for="(item, index) in group" :key="index" class="card">
+        <div class="title van-hairline--bottom">{{ item.title }}</div>
         <div class="container">
-          <div v-for="i in 4" :key="i" class="item" @click="$router.push({ name: 'Theme' })">
-            <icon name="#theme" />
-            <span class="label_name">个性主题</span>
-          </div>
-        </div>
-      </div>
-      <div class="card">
-        <div class="title van-hairline--bottom">我的设置</div>
-        <div class="container">
-          <div v-for="i in 4" :key="i" class="item" @click="$router.push({ name: 'Theme' })">
-            <icon name="#theme" />
-            <span class="label_name">个性主题</span>
+          <div v-for="i in item.children" :key="i.name" class="item" @click="$router.push({ name: i.name })">
+            <icon :name="`#${i.icon}`" />
+            <span class="label_name">{{ i.label }}</span>
           </div>
         </div>
       </div>
@@ -41,11 +32,27 @@
 <script lang="ts">
 import { defineComponent } from '@vue/composition-api'
 
+const group = [
+  {
+    title: '我的清单',
+    children: [
+      { label: 'CarryOut', name: 'CarryOut', icon: 'carryOut' },
+      { label: 'Delete', name: 'Delete', icon: 'delete' },
+      { label: 'Expired', name: 'Expired', icon: 'expired' },
+    ]
+  },
+  {
+    title: '个人设置',
+    children: [
+      { label: 'Theme', name: 'Theme', icon: 'theme' },
+    ]
+  }
+]
 export default defineComponent({
   name: 'Personal',
 
   setup () {
-    return { user: store.getters.user }
+    return { user: store.getters.user, group }
   },
 })
 </script>
@@ -115,7 +122,7 @@ export default defineComponent({
         width: calc(100% - 30px);
         margin: 0 auto 20px auto;
         border-radius: 6px;
-        padding: 0 12px 10px 12px;
+        padding: 0 12px;
         box-sizing: border-box;
         background-color: @white;
         box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.1);
@@ -148,6 +155,10 @@ export default defineComponent({
               height: 20px;
               margin: 0 auto 10px;
               color: var(--backgroundColor);
+            }
+
+            .label_name {
+              font-weight: 500;
             }
           }
         }

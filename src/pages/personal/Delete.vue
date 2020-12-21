@@ -1,6 +1,6 @@
 <template>
-  <section class="">
-
+  <section class="delete">
+    已删除任务
   </section>
 </template>
 
@@ -17,7 +17,7 @@ export default defineComponent({
 </script>
 
 <style lang="less" scoped>
-  . {
+  .delete {
 
   }
 </style>
