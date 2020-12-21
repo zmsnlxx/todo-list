@@ -2,7 +2,7 @@ import axios, { AxiosRequestConfig, AxiosResponse } from 'axios'
 
 
 export const instance = axios.create({
-  baseURL: ['http://todotest.zmsnlxx.cn', 'http://todo.zmsnlxx.cn'][process.env.BASE],
+  baseURL: ['http://todotestapi.zmsnlxx.cn', 'http://todoapi.zmsnlxx.cn'][process.env.BASE],
   timeout: 5000,
   withCredentials: true
 })
