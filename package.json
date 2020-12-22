@@ -4,10 +4,12 @@
   "private": true,
   "scripts": {
     "lint": "vue-cli-service lint",
-    "build:test": "cross-env BASE=0 vue-cli-service build",
-    "build": "cross-env BASE=1 vue-cli-service build",
-    "dev": "cross-env BASE=0 vue-cli-service serve",
-    "dev:prod": "cross-env BASE=1 vue-cli-service serve"
+    "build:local": "cross-env BASE=0 vue-cli-service build",
+    "build:test": "cross-env BASE=1 vue-cli-service build",
+    "build": "cross-env BASE=2 vue-cli-service build",
+    "dev:local": "cross-env BASE=0 vue-cli-service serve",
+    "dev": "cross-env BASE=1 vue-cli-service serve",
+    "dev:prod": "cross-env BASE=2 vue-cli-service serve"
   },
   "dependencies": {
     "@vue/composition-api": "^1.0.0-beta.11",
